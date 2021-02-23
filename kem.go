@@ -7,7 +7,7 @@ import (
 func kem(n int) (int, int) {
 	count := 0
 	larger := 0.0
-	for l := float64(n); l >= 2; l-- {
+	for l := float64(n / 2); l >= 2; l-- {
 		for i := float64(2); i < float64(n); i++ {
 			x := math.Pow(l, i)
 			if x >= float64(n) {
