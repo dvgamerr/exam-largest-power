@@ -1,11 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+)
 
 func main() {
-	fmt.Println("Power Larger!!")
-	for i := 1; i <= 1025; i++ {
-		l, c := kem(i)
-		fmt.Printf("- %d\t%d\n", l, c)
+	fmt.Println("Largest Power - Ranking!!")
+
+	dat, err := ioutil.ReadFile("./bench.out")
+	if err != nil {
+		panic(err)
 	}
+	fmt.Print(string(dat))
 }
