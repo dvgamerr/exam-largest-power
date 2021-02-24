@@ -27,13 +27,27 @@ func TestLargestPower(t *testing.T) {
 		{Input: 65, Largest: 64, Count: 3},
 		{Input: 1025, Largest: 1024, Count: 3},
 	}
-	t.Run("KEM-Check", func(t *testing.T) {
+	t.Run("KEM", func(t *testing.T) {
 		for _, r := range data {
 			l, c := kem(r.Input)
 			assert.Equal(t, l, r.Largest, fmt.Sprintf("%d Largest in wrong.", r.Input))
 			assert.Equal(t, c, r.Count, fmt.Sprintf("%d Counting in wrong.", r.Input))
 		}
 	})
+	t.Run("Copter", func(t *testing.T) {
+		for _, r := range data {
+			l, c := copter(r.Input)
+			assert.Equal(t, l, r.Largest, fmt.Sprintf("%d Largest in wrong.", r.Input))
+			assert.Equal(t, c, r.Count, fmt.Sprintf("%d Counting in wrong.", r.Input))
+		}
+	})
+	// t.Run("Boom", func(t *testing.T) {
+	// 	for _, r := range data {
+	// 		l, c := boom(float64(r.Input))
+	// 		assert.Equal(t, l, r.Largest, fmt.Sprintf("%d Largest in wrong.", r.Input))
+	// 		assert.Equal(t, c, r.Count, fmt.Sprintf("%d Counting in wrong.", r.Input))
+	// 	}
+	// })
 }
 
 func BenchmarkFunction(t *testing.B) {
@@ -46,4 +60,18 @@ func BenchmarkFunction(t *testing.B) {
 			kem(high.Input)
 		}
 	})
+
+	t.Run("Copter", func(t *testing.B) {
+		for i := 0; i < t.N; i++ {
+			copter(low.Input)
+			copter(high.Input)
+		}
+	})
+
+	// t.Run("Boom", func(t *testing.B) {
+	// 	for i := 0; i < t.N; i++ {
+	// 		boom(float64(low.Input))
+	// 		boom(float64(high.Input))
+	// 	}
+	// })
 }
