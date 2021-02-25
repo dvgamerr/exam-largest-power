@@ -41,6 +41,13 @@ func TestLargestPower(t *testing.T) {
 			assert.Equal(t, c, r.Count, fmt.Sprintf("%d Counting in wrong.", r.Input))
 		}
 	})
+	t.Run("Pop - pphanpobe", func(t *testing.T) {
+		for _, r := range data {
+			l, c := pp(r.Input)
+			assert.Equal(t, l, r.Largest, fmt.Sprintf("%d Largest in wrong.", r.Input))
+			assert.Equal(t, c, r.Count, fmt.Sprintf("%d Counting in wrong.", r.Input))
+		}
+	})
 	// t.Run("Boom", func(t *testing.T) {
 	// 	for _, r := range data {
 	// 		l, c := boom(float64(r.Input))
@@ -65,6 +72,13 @@ func BenchmarkFunction(t *testing.B) {
 		for i := 0; i < t.N; i++ {
 			copter(low.Input)
 			copter(high.Input)
+		}
+	})
+
+	t.Run("Pop - pphanpobe", func(t *testing.B) {
+		for i := 0; i < t.N; i++ {
+			pp(low.Input)
+			pp(high.Input)
 		}
 	})
 
